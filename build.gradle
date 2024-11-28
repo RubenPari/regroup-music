@@ -19,6 +19,10 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'se.michaelthelin.spotify:spotify-web-api-java:8.4.1'
+    implementation 'io.github.cdimascio:dotenv-java:3.0.0'
+    implementation "org.springframework.boot:spring-boot-starter-security"
+    implementation "org.springframework.session:spring-session-data-redis"
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
