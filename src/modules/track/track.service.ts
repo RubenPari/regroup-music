@@ -41,8 +41,10 @@ export class TrackService {
    */
   getArtistsSummary(
     totalUserTracks: Array<SpotifyApi.SavedTrackObject>,
-  ): ArtistSummary[] {
-    return totalUserTracks.reduce<ArtistSummary[]>((acc, track) => {
+  ): Array<ArtistSummary> {
+    const artistSummaryMap = totalUserTracks.reduce<
+      Record<string, ArtistSummary>
+    >((acc, track) => {
       const mainArtist = track.track.artists[0];
 
       if (!acc[mainArtist.id]) {
@@ -57,7 +59,9 @@ export class TrackService {
       }
 
       return acc;
-    }, {} as ArtistSummary[]);
+    }, {});
+
+    return Object.values(artistSummaryMap);
   }
 
   /**
