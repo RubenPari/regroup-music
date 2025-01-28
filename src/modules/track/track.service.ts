@@ -5,7 +5,7 @@ import { SpotifyService } from '../spotify/spotify.service';
 
 @Injectable()
 export class TrackService {
-  constructor(private readonly spotifyService: SpotifyService) { }
+  constructor(private readonly spotifyService: SpotifyService) {}
 
   async getAllUserTracks(): Promise<Array<SpotifyApi.SavedTrackObject>> {
     const limit = 50;
@@ -70,23 +70,23 @@ export class TrackService {
    * - from least counted to most counted
    * - alphabetical order by artist name
    * - reverse alphabetical order by artist name
-   * @param arrayArtistSummary
+   * @param artistsSummary
    * @param sortType
    */
   orderArtistsSummary(
-    arrayArtistSummary: ArtistSummary[],
+    artistsSummary: ArtistSummary[],
     sortType: ArtistsSummarySortType = ArtistsSummarySortType.MostToLeastCounted,
   ): ArtistSummary[] {
     switch (sortType) {
       case ArtistsSummarySortType.LeastToMostCounted:
-        return arrayArtistSummary.sort((a, b) => a.count - b.count);
+        return artistsSummary.sort((a, b) => a.count - b.count);
       case ArtistsSummarySortType.Alphabetical:
-        return arrayArtistSummary.sort((a, b) => a.name.localeCompare(b.name));
+        return artistsSummary.sort((a, b) => a.name.localeCompare(b.name));
       case ArtistsSummarySortType.ReverseAlphabetical:
-        return arrayArtistSummary.sort((a, b) => b.name.localeCompare(a.name));
+        return artistsSummary.sort((a, b) => b.name.localeCompare(a.name));
       case ArtistsSummarySortType.MostToLeastCounted:
       default:
-        return arrayArtistSummary.sort((a, b) => b.count - a.count);
+        return artistsSummary.sort((a, b) => b.count - a.count);
     }
   }
 }

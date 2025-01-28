@@ -10,15 +10,14 @@ export class TrackController {
   async getSummary(@Query('sort') sort: string) {
     const totalUserTracks = await this.trackService.getAllUserTracks();
 
-    const arrayArtistSummary =
-      this.trackService.getArtistsSummary(totalUserTracks);
+    const artistsSummary = this.trackService.getArtistsSummary(totalUserTracks);
 
     if (!sort || sort === '' || !(sort in ArtistsSummarySortType)) {
-      return this.trackService.orderArtistsSummary(arrayArtistSummary);
+      return this.trackService.orderArtistsSummary(artistsSummary);
     }
 
     return this.trackService.orderArtistsSummary(
-      arrayArtistSummary,
+      artistsSummary,
       sort as ArtistsSummarySortType,
     );
   }
