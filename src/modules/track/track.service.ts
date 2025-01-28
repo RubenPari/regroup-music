@@ -59,4 +59,30 @@ export class TrackService {
       return acc;
     }, {} as ArtistSummary[]);
   }
+
+  /**
+   * reordering objects array:
+   * - from most counted to least counted (default)
+   * - from least counted to most counted
+   * - alphabetical order by artist name
+   * - reverse alphabetical order by artist name
+   * @param arrayArtistSummary
+   * @param sortType
+   */
+  orderArtistsSummary(
+    arrayArtistSummary: ArtistSummary[],
+    sortType: ArtistsSummarySortType = ArtistsSummarySortType.MostToLeastCounted,
+  ): ArtistSummary[] {
+    switch (sortType) {
+      case ArtistsSummarySortType.LeastToMostCounted:
+        return arrayArtistSummary.sort((a, b) => a.count - b.count);
+      case ArtistsSummarySortType.Alphabetical:
+        return arrayArtistSummary.sort((a, b) => a.name.localeCompare(b.name));
+      case ArtistsSummarySortType.ReverseAlphabetical:
+        return arrayArtistSummary.sort((a, b) => b.name.localeCompare(a.name));
+      case ArtistsSummarySortType.MostToLeastCounted:
+      default:
+        return arrayArtistSummary.sort((a, b) => b.count - a.count);
+    }
+  }
 }
