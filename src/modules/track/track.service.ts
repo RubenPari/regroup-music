@@ -54,7 +54,6 @@ export class TrackService {
           count: 1,
         };
       } else {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         acc[mainArtist.id].count++;
       }
 
