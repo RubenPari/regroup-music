@@ -59,3 +59,5 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 !.env.project
 !.env.vault
 /.vscode/launch.json
+
+.flaskenv*
