@@ -23,11 +23,11 @@ async function bootstrap() {
       resave: false,
       saveUninitialized: false,
       secret: process.env.SESSION_SECRET!,
-      cookie: { secure: false }, // TODO: set to true in production
+      cookie: { secure: true },
     }),
   );
 
-  await app.listen(process.env.PORT ?? 3000);
+  await app.listen(process.env.PORT!);
 }
 
 void bootstrap().then(() => console.log('Server is running!'));
