@@ -11,7 +11,10 @@ async function bootstrap() {
     url: process.env.REDIS_URL!,
   });
 
-  redisClient.connect().catch(console.error);
+  redisClient.connect().catch((error) => {
+    console.error('Error connecting to Redis');
+    console.error(error);
+  });
 
   const redisStore = new RedisStore({
     client: redisClient,
