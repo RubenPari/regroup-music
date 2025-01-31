@@ -26,7 +26,7 @@ async function bootstrap() {
       resave: false,
       saveUninitialized: false,
       secret: process.env.SESSION_SECRET!,
-      cookie: { secure: true },
+      cookie: { secure: false }, // TODO: Set to true in production
     }),
   );
 
