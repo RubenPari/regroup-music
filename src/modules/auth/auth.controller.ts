@@ -27,7 +27,7 @@ export class AuthController {
 
     const { code, state } = req.query;
 
-    if (state !== req.session.state) {
+    if (state != req.session.state) {
       return res.status(403).send('State mismatch');
     }
 
