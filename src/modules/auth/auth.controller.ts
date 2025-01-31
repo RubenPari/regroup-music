@@ -27,7 +27,8 @@ export class AuthController {
 
     const { code, state } = req.query;
 
-    if (state != req.session.state) {
+    // eslint-disable-next-line @typescript-eslint/no-base-to-string
+    if (String(state) != req.session.state) {
       return res.status(403).send('State mismatch');
     }
 
