@@ -2,10 +2,16 @@ import { Injectable } from '@nestjs/common';
 import ArtistSummary from '../../models/artistSummary';
 import ArtistsSummarySortType from '../../models/artistsSummarySortType';
 import { SpotifyService } from '../spotify/spotify.service';
+import { Inject } from '@nestjs/common';
+import { CACHE_MANAGER } from '@nestjs/cache-manager';
+import { Cache } from 'cache-manager';
 
 @Injectable()
 export class TrackService {
-  constructor(private readonly spotifyService: SpotifyService) {}
+  constructor(
+    private readonly spotifyService: SpotifyService,
+    @Inject(CACHE_MANAGER) private cacheManager: Cache,
+  ) {}
 
   async getAllUserTracks(): Promise<Array<SpotifyApi.SavedTrackObject>> {
     const limit = 50;
@@ -40,7 +46,7 @@ export class TrackService {
    * @param totalUserTracks
    */
   getArtistsSummary(
-    totalUserTracks: Array<SpotifyApi.SavedTrackObject>,
+    totalUserTracks: SpotifyApi.SavedTrackObject[],
   ): Array<ArtistSummary> {
     const artistSummaryMap = totalUserTracks.reduce<
       Record<string, ArtistSummary>
