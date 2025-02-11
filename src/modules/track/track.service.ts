@@ -42,22 +42,27 @@ export class TrackService {
   getArtistsSummary(
     totalUserTracks: Array<SpotifyApi.SavedTrackObject>,
   ): ArtistSummary[] {
-    return totalUserTracks.reduce<ArtistSummary[]>((acc, track) => {
-      const mainArtist = track.track.artists[0];
+    const artistSummaryMap = totalUserTracks.reduce<ArtistSummary[]>(
+      (acc, track) => {
+        const mainArtist = track.track.artists[0];
 
-      if (!acc[mainArtist.id]) {
-        acc[mainArtist.id] = {
-          name: mainArtist.name,
-          id: mainArtist.id,
-          count: 1,
-        };
-      } else {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        acc[mainArtist.id].count++;
-      }
+        if (!acc[mainArtist.id]) {
+          acc[mainArtist.id] = {
+            name: mainArtist.name,
+            id: mainArtist.id,
+            count: 1,
+          };
+        } else {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+          acc[mainArtist.id].count++;
+        }
 
-      return acc;
-    }, {} as ArtistSummary[]);
+        return acc;
+      },
+      {} as ArtistSummary[],
+    );
+
+    return Object.values(artistSummaryMap);
   }
 
   /**
