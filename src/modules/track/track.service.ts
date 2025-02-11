@@ -5,7 +5,7 @@ import { SpotifyService } from '../spotify/spotify.service';
 
 @Injectable()
 export class TrackService {
-  constructor(private readonly spotifyService: SpotifyService) { }
+  constructor(private readonly spotifyService: SpotifyService) {}
 
   async getAllUserTracks(): Promise<Array<SpotifyApi.SavedTrackObject>> {
     const limit = 50;
