@@ -90,4 +90,21 @@ export class TrackService {
         return arrayArtistSummary.sort((a, b) => b.count - a.count);
     }
   }
+
+  async getArtistsSummaryBySort(
+    sort: string | undefined = 'most_to_least_counted',
+  ): Promise<ArtistSummary[]> {
+    const totalUserTracks = await this.getAllUserTracks();
+
+    const arrayArtistSummary = this.getArtistsSummary(totalUserTracks);
+
+    if (!sort || sort === '' || !(sort in ArtistsSummarySortType)) {
+      return this.orderArtistsSummary(arrayArtistSummary);
+    }
+
+    return this.orderArtistsSummary(
+      arrayArtistSummary,
+      sort as ArtistsSummarySortType,
+    );
+  }
 }
